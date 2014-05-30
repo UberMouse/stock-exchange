@@ -24,5 +24,5 @@ end
 
 1000.times do
   Stock.create(ticker: generate_ticker, name: generate_stock_name,
-               price: generate_stock_price, quantity: generate_stock_quantity)
+               price: generate_stock_price, quantity: generate_stock_quantity, delta: 0)
 end
