@@ -31,8 +31,8 @@ class Stock < ActiveRecord::Base
     stock.quantity -= amount
     portfolio_stock = Trade.find_by(stock_id: ticker)
     if portfolio_stock.nil?
-      raise 'you dont own dat stock nigga'
-    else
+      raise "You don't own that stock sorry"
+    else 
       stock.quantity -= amount
       portfolio_stock.quantity -= amount
       if portfolio_stock.quantity <= 0
