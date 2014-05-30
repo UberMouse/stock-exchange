@@ -1,9 +1,13 @@
 require 'app/services/stock_service'
+require 'db/config'
 
 class StockExchange
   def initialize(args)
     command = args.shift
+    command = 'list' if command.nil?
     @service = StockService.new
+    # the following case statement can be replaced with this send command
+    # send(command.to_sym, *args)
     case command
       when 'list'
         list
@@ -15,7 +19,8 @@ class StockExchange
         show_portfolio
       when 'view_stock'
         view_stock *args
-      else raise('Invalid Command')
+      else
+        raise('Invalid Command')
     end
   end
 
