@@ -1,4 +1,4 @@
-require 'active_record'
+require_relative '../../db/config'
 
 class Stock < ActiveRecord::Base
 end

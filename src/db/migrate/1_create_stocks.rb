@@ -1,9 +1,9 @@
 require_relative '../config'
 
-class CreateStockList < ActiveRecord::Migration
+class CreateStocks < ActiveRecord::Migration
   def change
     create_table :stocks do |c|
-      c.string :ticker :limit => 3
+      c.string :ticker, :limit => 3
       c.string :name
       c.float :price
       c.integer :quantity

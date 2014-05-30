@@ -1,4 +1,7 @@
 require 'faker'
+require_relative '../../app/models/stock'
+
+
 
 STOCK_QUANTITY_RANGE = 1000000..10000000
 
