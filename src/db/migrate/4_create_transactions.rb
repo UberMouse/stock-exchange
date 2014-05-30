@@ -5,7 +5,7 @@ class CreateTransactions < ActiveRecord::Migration
     create_table :transactions do |t|
       t.string :stock_id
       t.integer :quantity
-      t.integer :price
+      t.float :price
       t.boolean :is_buy
     end
   end
