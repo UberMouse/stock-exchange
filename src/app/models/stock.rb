@@ -5,6 +5,11 @@ class Stock < ActiveRecord::Base
   def self.buy(ticker, amount)
     amount = amount.to_i
     stock = find_by(ticker: ticker)
+    current_money = Transaction.calculate_money
+
+    raise 'Not enough money' if stock.price * amount > current_money
+    raise 'Not enough shares remain' if stock.quantity < amount
+
     stock.quantity -= amount
     portfolio_stock = Trade.find_by(stock_id: ticker)
     if portfolio_stock.nil?

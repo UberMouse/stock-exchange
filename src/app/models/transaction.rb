@@ -9,7 +9,7 @@ class Transaction < ActiveRecord::Base
       method = (t.is_buy) ? :- : :+
       money = money.send(method, t.quantity * t.price)
     end
+    @@urrent_money = money
     money
   end
-
 end
