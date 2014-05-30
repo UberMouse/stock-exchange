@@ -62,4 +62,9 @@ class StockExchange
 
     Stock.buy(id, amount_to_buy)
   end
+
+  def end_of_trading
+    @service.update_stocks
+  end
 end
+
