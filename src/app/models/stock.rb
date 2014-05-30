@@ -1,4 +1,6 @@
 require_relative '../../db/config'
+require 'pry'
+require 'pry-byebug'
 
 class Stock < ActiveRecord::Base
 
@@ -34,16 +36,20 @@ class Stock < ActiveRecord::Base
     stock.save
   end
 
-  def to_s
-    "Stock: #{name}, Ticker: #{ticker}, Quantity: #{quantity}, Price: #{price}"
-  end
-
   def self.update_stocks
     Stock.all.each do |stock|
-      price = stock.price
-      new_price = (price * rand(PRICEFLUX)).round(2)
-      stock.update(price: new_price)
+      old_price = stock.price
+      new_price = (old_price * rand(PRICEFLUX)).round(2)
+      delta_price = (new_price-old_price).round(2)
+      stock.update(price: new_price, delta: delta_price)
     end
+  end
+
+
+  def to_s
+    color = "red"
+
+    "Stock: #{name}, Ticker: #{ticker}, Quantity: #{quantity}, Price: #{price}, Movement: #{delta}.#{color}"
   end
 
 end
