@@ -1,5 +1,8 @@
-require 'app/services/stock_service'
 require 'db/config'
+require 'app/services/stock_service'
+require 'app/models/transaction'
+
+
 
 class StockExchange
   def initialize(args)
@@ -33,6 +36,7 @@ class StockExchange
   end
 
   def show_portfolio
+    puts "You have #{Transaction.calculate_money} money"
     @service.get_portfolio.each do |stock|
       puts stock
     end
