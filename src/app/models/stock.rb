@@ -33,7 +33,7 @@ class Stock < ActiveRecord::Base
     if portfolio_stock.nil?
       raise "You don't own that stock sorry"
     else 
-      stock.quantity -= amount
+      stock.quantity += amount
       portfolio_stock.quantity -= amount
       if portfolio_stock.quantity <= 0
         portfolio_stock.delete
