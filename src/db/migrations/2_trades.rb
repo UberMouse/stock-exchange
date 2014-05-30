@@ -1,8 +1,8 @@
 require_relative '../config'
 
-class Portfolio < ActiveRecord::Migration
+class CreateTrades < ActiveRecord::Migration
   def change
-    create_table :portfolio do |c|
+    create_table :trades do |c|
       c.integer :stock_list_id
       c.integer :quantity
 
