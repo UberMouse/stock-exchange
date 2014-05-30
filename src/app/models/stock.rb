@@ -1,11 +1,8 @@
 require_relative '../../db/config'
-require 'pry'
-require 'pry-byebug'
 
 class Stock < ActiveRecord::Base
 
   def self.buy(ticker, amount)
-    binding.pry
     amount = amount.to_i
     stock = find_by(ticker: ticker)
     stock.quantity -= amount
