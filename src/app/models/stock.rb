@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-require_relative '../../db/config'
-require 'pry'
-require 'pry-byebug'
+require 'db/config'
 require 'colorize'
-=======
 require 'app/models/transaction'
->>>>>>> 4cc1201e62e651e2fd591233bcc0151a05daebab
 
 class Stock < ActiveRecord::Base
 
