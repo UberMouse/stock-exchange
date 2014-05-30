@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 require_relative '../../db/config'
 require 'pry'
 require 'pry-byebug'
 require 'colorize'
+=======
+require 'app/models/transaction'
+>>>>>>> 4cc1201e62e651e2fd591233bcc0151a05daebab
 
 class Stock < ActiveRecord::Base
 
@@ -10,6 +14,11 @@ class Stock < ActiveRecord::Base
   def self.buy(ticker, amount)
     amount = amount.to_i
     stock = find_by(ticker: ticker)
+    current_money = Transaction.calculate_money
+
+    raise 'Not enough money' if stock.price * amount > current_money
+    raise 'Not enough shares remain' if stock.quantity < amount
+
     stock.quantity -= amount
     portfolio_stock = Trade.find_by(stock_id: ticker)
     if portfolio_stock.nil?
@@ -17,6 +26,7 @@ class Stock < ActiveRecord::Base
     else
       portfolio_stock.quantity += amount
     end
+    Transaction.create(stock_id: ticker, quantity: amount, price: stock.price, is_buy: true)
     stock.save
   end
 
@@ -33,6 +43,7 @@ class Stock < ActiveRecord::Base
       if portfolio_stock.quantity <= 0
         portfolio_stock.delete
       end
+      Transaction.create(stock_id: ticker, quantity: amount, price: stock.price, is_buy: false)
     end
     stock.save
   end

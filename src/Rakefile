@@ -19,6 +19,11 @@ task 'db:empty' do
 
 end
 
+desc 'remake db'
+task 'db:reload' => %w(db:drop db:create db:migrate db:populate) do
+
+end
+
 desc "migrate the database (options: VERSION=x, VERBOSE=false, SCOPE=blog)."
 task "db:migrate" do
   ActiveRecord::Migrator.migrations_paths << File.dirname(__FILE__) + 'db/migrate'

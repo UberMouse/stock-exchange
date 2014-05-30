@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 require './app/services/stock_service'
+=======
+>>>>>>> 4cc1201e62e651e2fd591233bcc0151a05daebab
 require 'db/config'
+require 'app/services/stock_service'
+require 'app/models/transaction'
+
+
 
 class StockExchange
   def initialize(args)
     command = args.shift
     command = 'list' if command.nil?
     @service = StockService.new
+<<<<<<< HEAD
     # the following case statement can be replaced with this send command
     # send(command.to_sym, *args)
     case command
@@ -24,6 +32,25 @@ class StockExchange
       else
         raise('Invalid Command')
     end
+=======
+
+    send(command.to_sym, *args)
+    # the following case statement is equivalent to the send command above
+    # case command
+    #   when 'list'
+    #     list
+    #   when 'sell'
+    #     sell *args
+    #   when 'buy'
+    #     buy *args
+    #   when 'portfolio'
+    #     show_portfolio
+    #   when 'view_stock'
+    #     view_stock *args
+    #   else
+    #     raise('Invalid Command')
+    # end
+>>>>>>> 4cc1201e62e651e2fd591233bcc0151a05daebab
   end
 
   def buy(id, amount)
@@ -35,6 +62,7 @@ class StockExchange
   end
 
   def show_portfolio
+    puts "You have #{Transaction.calculate_money} money"
     @service.get_portfolio.each do |stock|
       puts stock
     end
@@ -50,7 +78,20 @@ class StockExchange
     end
   end
 
+<<<<<<< HEAD
   def end_of_trading
     @service.update_stocks
   end
 end
+=======
+  def all_on_red(id)
+    portfolio = @service.get_portfolio
+    portfolio.each{|ps| ps.sell}
+
+    stock_to_buy = @service.get_stock id
+    amount_to_buy = Transaction.calculate_money / stock_to_buy.price
+
+    Stock.buy(id, amount_to_buy)
+  end
+end
+>>>>>>> 4cc1201e62e651e2fd591233bcc0151a05daebab
