@@ -70,4 +70,3 @@ class StockExchange
     @service.update_stocks
   end
 end
-

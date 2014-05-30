@@ -1,5 +1,6 @@
-require 'app/models/transaction'
 require 'db/config'
+require 'colorize'
+require 'app/models/transaction'
 
 
 class Stock < ActiveRecord::Base
@@ -53,9 +54,13 @@ class Stock < ActiveRecord::Base
 
 
   def to_s
-    color = "red"
+    if delta > 0
+      var = :green
+    else
+      var = :red
+    end
 
-    "Stock: #{name}, Ticker: #{ticker}, Quantity: #{quantity}, Price: #{price}"#", Movement: #{delta}.#{color}"
+    "Stock: #{name}, Ticker: #{ticker}, Quantity: #{quantity}, Price: #{price}, Movement:" + " #{delta}".send(var)
   end
 
 end
