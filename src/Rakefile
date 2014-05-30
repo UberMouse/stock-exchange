@@ -43,6 +43,8 @@ task 'db:version' do
   puts "Current version: #{ActiveRecord::Migrator.current_version}"
 end
 
+desc 'boots into console'
+
 desc 'Run the specs'
 RSpec::Core::RakeTask.new(:specs) do |t|
   t.rspec_opts = '-I . ./app'

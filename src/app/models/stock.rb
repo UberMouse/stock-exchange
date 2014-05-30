@@ -55,7 +55,7 @@ class Stock < ActiveRecord::Base
   def to_s
     color = "red"
 
-    "Stock: #{name}, Ticker: #{ticker}, Quantity: #{quantity}, Price: #{price}, Movement: #{delta}.#{color}"
+    "Stock: #{name}, Ticker: #{ticker}, Quantity: #{quantity}, Price: #{price}"#", Movement: #{delta}.#{color}"
   end
 
 end
