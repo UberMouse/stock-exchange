@@ -1,4 +1,3 @@
-require_relative '../../db/config'
 require 'app/models/transaction'
 
 class Stock < ActiveRecord::Base
