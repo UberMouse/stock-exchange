@@ -1,11 +1,9 @@
 require_relative '../../db/config'
-require 'pry'
-require 'pry-byebug'
+require 'app/models/transaction'
 
 class Stock < ActiveRecord::Base
 
   def self.buy(ticker, amount)
-    binding.pry
     amount = amount.to_i
     stock = find_by(ticker: ticker)
     stock.quantity -= amount
@@ -15,6 +13,7 @@ class Stock < ActiveRecord::Base
     else
       portfolio_stock.quantity += amount
     end
+    Transaction.create(stock_id: ticker, quantity: amount, price: stock.price, is_buy: true)
     stock.save
   end
 
@@ -31,6 +30,7 @@ class Stock < ActiveRecord::Base
       if portfolio_stock.quantity <= 0
         portfolio_stock.delete
       end
+      Transaction.create(stock_id: ticker, quantity: amount, price: stock.price, is_buy: false)
     end
     stock.save
   end
