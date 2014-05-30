@@ -9,22 +9,23 @@ class StockExchange
     command = args.shift
     command = 'list' if command.nil?
     @service = StockService.new
-    # the following case statement can be replaced with this send command
-    # send(command.to_sym, *args)
-    case command
-      when 'list'
-        list
-      when 'sell'
-        sell *args
-      when 'buy'
-        buy *args
-      when 'portfolio'
-        show_portfolio
-      when 'view_stock'
-        view_stock *args
-      else
-        raise('Invalid Command')
-    end
+
+    send(command.to_sym, *args)
+    # the following case statement is equivalent to the send command above
+    # case command
+    #   when 'list'
+    #     list
+    #   when 'sell'
+    #     sell *args
+    #   when 'buy'
+    #     buy *args
+    #   when 'portfolio'
+    #     show_portfolio
+    #   when 'view_stock'
+    #     view_stock *args
+    #   else
+    #     raise('Invalid Command')
+    # end
   end
 
   def buy(id, amount)
@@ -50,5 +51,15 @@ class StockExchange
     @service.get_all_stocks.each do |stock|
       puts stock
     end
+  end
+
+  def all_on_red(id)
+    portfolio = @service.get_portfolio
+    portfolio.each{|ps| ps.sell}
+
+    stock_to_buy = @service.get_stock id
+    amount_to_buy = Transaction.calculate_money / stock_to_buy.price
+
+    Stock.buy(id, amount_to_buy)
   end
 end
