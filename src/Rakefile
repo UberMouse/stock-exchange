@@ -39,6 +39,8 @@ task 'db:version' do
 end
 
 desc 'Run the specs'
-RSpec::Core::RakeTask.new(:specs)
+RSpec::Core::RakeTask.new(:specs) do |t|
+  t.rspec_opts = '-I . ./app'
+end
 
 task :default  => :specs

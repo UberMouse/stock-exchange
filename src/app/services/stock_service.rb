@@ -26,4 +26,8 @@ class StockService
   def get_portfolio
     Trade.all
   end
+
+  def update_stocks
+    Stock.update_stocks
+  end
 end

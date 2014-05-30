@@ -1,4 +1,4 @@
-require 'app/services/stock_service'
+require './app/services/stock_service'
 require 'db/config'
 
 class StockExchange
@@ -19,6 +19,8 @@ class StockExchange
         show_portfolio
       when 'view_stock'
         view_stock *args
+      when 'end_of_trading'
+        end_of_trading
       else
         raise('Invalid Command')
     end
@@ -46,5 +48,9 @@ class StockExchange
     @service.get_all_stocks.each do |stock|
       puts stock
     end
+  end
+
+  def end_of_trading
+    @service.update_stocks
   end
 end
