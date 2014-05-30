@@ -1,6 +1,7 @@
 require_relative '../../db/config'
 require 'pry'
 require 'pry-byebug'
+require 'colorize'
 
 class Stock < ActiveRecord::Base
 
@@ -47,9 +48,14 @@ class Stock < ActiveRecord::Base
 
 
   def to_s
-    color = "red"
 
-    "Stock: #{name}, Ticker: #{ticker}, Quantity: #{quantity}, Price: #{price}, Movement: #{delta}.#{color}"
+    if delta > 0
+      var = :green
+    else
+      var = :red
+    end
+
+    "Stock: #{name}, Ticker: #{ticker}, Quantity: #{quantity}, Price: #{price}, Movement:" + " #{delta}".send(var)
   end
 
 end
