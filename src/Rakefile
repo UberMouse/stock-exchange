@@ -44,6 +44,9 @@ task 'db:version' do
 end
 
 desc 'boots into console'
+task 'console' do
+  exec 'irb -r./run_exchange'
+end
 
 desc 'Run the specs'
 RSpec::Core::RakeTask.new(:specs) do |t|
