@@ -2,6 +2,6 @@ require 'active_record'
 
 class Trade < ActiveRecord::Base
   def to_s
-    "Stock ticker: #{stock_list_id}, Quantity: #{quantity}"
+    "Stock ticker: #{stock_id}, Quantity: #{quantity}"
   end
 end

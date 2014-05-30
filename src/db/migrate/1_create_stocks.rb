@@ -1,4 +1,4 @@
-require_relative '../config'
+require 'db/config'
 
 class CreateStocks < ActiveRecord::Migration
   def change

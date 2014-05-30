@@ -12,7 +12,7 @@ class StockService
   end
 
   def get_portfolio_stock(ticker)
-    Trade.find_by(stock_list_id: ticker)
+    Trade.find_by(stock_id: ticker)
   end
 
   def buy_stock(id, amount)
