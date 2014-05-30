@@ -1,6 +1,10 @@
+require 'db/config'
+require 'colorize'
 require 'app/models/transaction'
 
 class Stock < ActiveRecord::Base
+
+  PRICEFLUX = 0.8..1.6
 
   def self.buy(ticker, amount)
     amount = amount.to_i
@@ -39,8 +43,25 @@ class Stock < ActiveRecord::Base
     stock.save
   end
 
+  def self.update_stocks
+    Stock.all.each do |stock|
+      old_price = stock.price
+      new_price = (old_price * rand(PRICEFLUX)).round(2)
+      delta_price = (new_price-old_price).round(2)
+      stock.update(price: new_price, delta: delta_price)
+    end
+  end
+
+
   def to_s
-    "Stock: #{name}, Ticker: #{ticker}, Quantity: #{quantity}, Price: #{price}"
+
+    if delta > 0
+      var = :green
+    else
+      var = :red
+    end
+
+    "Stock: #{name}, Ticker: #{ticker}, Quantity: #{quantity}, Price: #{price}, Movement:" + " #{delta}".send(var)
   end
 
 end
