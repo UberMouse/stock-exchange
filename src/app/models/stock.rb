@@ -2,8 +2,8 @@ require 'db/config'
 require 'colorize'
 require 'app/models/transaction'
 
-class Stock < ActiveRecord::Base
 
+class Stock < ActiveRecord::Base
   PRICEFLUX = 0.8..1.6
 
   def self.buy(ticker, amount)
@@ -54,7 +54,6 @@ class Stock < ActiveRecord::Base
 
 
   def to_s
-
     if delta > 0
       var = :green
     else

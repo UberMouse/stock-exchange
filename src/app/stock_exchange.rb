@@ -48,8 +48,11 @@ class StockExchange
   end
 
   def list
-    @service.get_all_stocks.each do |stock|
-      puts stock
+    all_stocks = @service.get_all_stocks
+    unless all_stocks.empty?
+      all_stocks.each do |stock|
+        puts stock
+      end
     end
   end
 
